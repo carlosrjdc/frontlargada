@@ -23,7 +23,7 @@ export function Detalhes(){
         <div>Termino Separação: {infoTransporte?.fimSeparacao}</div>
         <div>Inicio Conferencia: {infoTransporte?.inicioCarregamento}</div>
         <div>Termino Carregamento: {infoTransporte?.fimCarregamento}</div>
-        <Button onClick={()=> setShow(true)}>Teste</Button>
+        <Button onClick={()=> setShow(true)}>Atualizar</Button>
 
 
 

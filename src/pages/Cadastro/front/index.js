@@ -15,7 +15,7 @@ export default function Cadastro(){
       : dados;
 
     async function buscarRegistros(){
-        Axios.get("/registros").then(response => setDados(response.data)).catch(erro => console.log(erro))
+        Axios.get("/registros").then(response => setDados(response.data.filter(item=> item.fimCarregamento === null))).catch(erro => console.log(erro))
     }
 
     useEffect(()=>{

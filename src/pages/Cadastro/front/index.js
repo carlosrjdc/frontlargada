@@ -1,4 +1,4 @@
-import { hover } from '@testing-library/user-event/dist/hover';
+
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,7 +11,7 @@ export default function Cadastro(){
     const [transporte, setTransporte] = useState("")
 
     const filtro = transporte.length > 0
-      ? dados.filter((item) => item.Transporte.includes(transporte.toUpperCase()))
+      ? dados.filter((item) => item.Transporte.includes(transporte.toUpperCase()) || item.Nf.includes(transporte.toUpperCase()))
       : dados;
 
     async function buscarRegistros(){
@@ -29,11 +29,6 @@ export default function Cadastro(){
             <Form.Label>Informe o Transporte</Form.Label>
             <Form.Control value={transporte} onChange={(e)=> setTransporte(e.target.value)} type="number" placeholder="Coloque o transporte" />
         </Form.Group>
-
-      
-        <Button variant="primary" type="submit">
-            buscar
-        </Button>
         </Form>
         <Lista lista={filtro}/>
     </div>

@@ -13,8 +13,8 @@ export default function Cadastro() {
     transporte.length > 0
       ? dados.filter(
           (item) =>
-            item.Transporte.includes(transporte.toUpperCase()) ||
-            item.Nf.includes(transporte.toUpperCase())
+            item.Transporte?.includes(transporte.toUpperCase()) ||
+            item.Nf?.includes(transporte.toUpperCase())
         )
       : dados;
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
@@ -9,9 +10,10 @@ import ListaEmSeparacao from "./EmSeparacao";
 import ListaGeral from "./Todos";
 
 function TabelaStatusGeral() {
+  const [defaultKey, setDefaultKey] = useState("aSeparar");
   return (
     <Tabs
-      defaultActiveKey="listaGeral"
+      defaultActiveKey={defaultKey}
       id="uncontrolled-tab-example"
       className="mb-3"
     >
@@ -24,7 +26,12 @@ function TabelaStatusGeral() {
       <Tab eventKey="aConferir" title="A Conferir">
         <ListaAConferir />
       </Tab>
-      <Tab eventKey="emCarregamento" title="Em Carregamento">
+      <Tab
+        onSelect={() => setDefaultKey("emCarregamento")}
+        onClick={() => setDefaultKey("emCarregamento")}
+        eventKey="emCarregamento"
+        title="Em Carregamento"
+      >
         <ListaEmCarregamento />
       </Tab>
       <Tab eventKey="carregado" title="Carregado">

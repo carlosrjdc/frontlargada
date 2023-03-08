@@ -144,7 +144,7 @@ export default function GeralDash() {
           paddingBottom: 30,
         }}
       >
-        Em Conferencia: {somar()?.EmConferencia}
+        Em Carregamento: {somar()?.EmConferencia}
         <br></br>
         Peso: {somar().EmConferenciaSoma.toLocaleString("pt-BR")}
       </div>

@@ -2,6 +2,7 @@ import Cadastro from "../pages/Cadastro/front";
 
 import { Detalhes } from "../pages/Detalhes";
 import GeralDash from "../pages/Geral";
+import TabelaStatusGeral from "../pages/Tabela";
 import Transporte from "../pages/Transporte";
 
 const rotas = [
@@ -18,8 +19,8 @@ const rotas = [
     element: <GeralDash />,
   },
   {
-    path: "/transporte",
-    element: <Transporte />,
+    path: "/status",
+    element: <TabelaStatusGeral />,
   },
 ];
 

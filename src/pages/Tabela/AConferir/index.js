@@ -1,34 +1,40 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Axios from "../../../config/config";
+import Axios from "../../../config/config.js";
 import { GlobalContext } from "../../../contexts";
-import Lista from "../Lista";
+import Lista from "../../Cadastro/Lista";
+import Form from "react-bootstrap/Form";
 
-export default function Cadastro() {
+export default function ListaAConferir() {
   const { dados, setDados } = useContext(GlobalContext);
   const [transporte, setTransporte] = useState("");
+  const [primieroFiltro, setPrimeiroFiltro] = useState([]);
 
   const filtro =
     transporte.length > 0
-      ? dados.filter(
+      ? primieroFiltro.filter(
           (item) =>
             item.Transporte?.includes(transporte.toUpperCase()) ||
             item.Nf?.includes(transporte.toUpperCase()) ||
             item.NRota?.includes(transporte.toUpperCase())
         )
-      : dados;
+      : primieroFiltro;
 
   async function buscarRegistros() {
     Axios.get("/registros")
-      .then((response) => setDados(response.data))
+      .then((response) => {
+        setPrimeiroFiltro(
+          response.data.filter(
+            (item) =>
+              item.inicioCarregamento === null && item.fimSeparacao !== null
+          )
+        );
+      })
       .catch((erro) => console.log(erro));
   }
 
   useEffect(() => {
     buscarRegistros();
   }, []);
-
   return (
     <div style={{ padding: 10, marginTop: 20 }}>
       <Form>

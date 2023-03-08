@@ -14,7 +14,8 @@ export default function Cadastro() {
       ? dados.filter(
           (item) =>
             item.Transporte?.includes(transporte.toUpperCase()) ||
-            item.Nf?.includes(transporte.toUpperCase())
+            item.Nf?.includes(transporte.toUpperCase()) ||
+            item.NRota?.includes(transporte.toUpperCase())
         )
       : dados;
 

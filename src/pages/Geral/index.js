@@ -12,6 +12,15 @@ export default function GeralDash() {
         await setDados(response.data);
         await setInfoSeparacao(
           await {
+            quantidade: response.data.length,
+            volume: response.data.reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
             quantidadeASeparar: response.data.filter(
               (atual) => atual["inicioSeparacao"] === null
             ).length,
@@ -217,6 +226,20 @@ export default function GeralDash() {
       <MenuInferior />
       <div style={{ textAlign: "center", marginTop: 10, fontSize: 20 }}>
         <div>STATUS ATUALIZADO ONLINE</div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          Total: {infoSeparacao.quantidade}
+          <br></br>Volume:
+          {parseInt(infoSeparacao.volume).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
         <div
           style={{
             borderRadius: 5,

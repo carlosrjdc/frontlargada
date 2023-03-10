@@ -10,7 +10,7 @@ export default function GeralDash() {
     await Axios.get("/registros")
       .then(async (response) => {
         await setDados(response.data);
-        setInfoSeparacao(
+        await setInfoSeparacao(
           await {
             quantidadeASeparar: response.data.filter(
               (atual) => atual["inicioSeparacao"] === null
@@ -242,7 +242,7 @@ export default function GeralDash() {
         >
           Em Separação: {infoSeparacao.quantidadeEmSeparacao}
           <br></br>Volume:{" "}
-          {parseInt(infoSeparacao.volumeEmSeparacao).toLocaleString("pt-BR")}
+          {parseInt(infoSeparacao?.volumeEmSeparacao).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div
@@ -256,7 +256,7 @@ export default function GeralDash() {
         >
           A Conferir: {infoSeparacao.quantidadeAConferir}
           <br></br>Volume:{" "}
-          {parseInt(infoSeparacao.volumeAConferir).toLocaleString("pt-BR")}
+          {parseInt(infoSeparacao?.volumeAConferir).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div
@@ -269,7 +269,7 @@ export default function GeralDash() {
           }}
         >
           Em Carregamento: {infoSeparacao.quantidadeEmConferencia}
-          <br></br>Volume: {infoSeparacao.volumeEmConferencia}
+          <br></br>Volume: {infoSeparacao?.volumeEmConferencia}
           <br></br>
         </div>
         <div
@@ -283,7 +283,7 @@ export default function GeralDash() {
         >
           Carregado: {infoSeparacao.quantidadeCarregado}
           <br></br>Volume:
-          {parseInt(infoSeparacao.volumeCarregado).toLocaleString("pt-BR")}
+          {parseInt(infoSeparacao?.volumeCarregado).toLocaleString("pt-BR")}
           <br></br>
         </div>
       </div>

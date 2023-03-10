@@ -292,7 +292,8 @@ export default function GeralDash() {
           }}
         >
           Em Carregamento: {infoSeparacao.quantidadeEmConferencia}
-          <br></br>Volume: {infoSeparacao?.volumeEmConferencia}
+          <br></br>Volume:
+          {parseInt(infoSeparacao?.volumeEmConferencia).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div

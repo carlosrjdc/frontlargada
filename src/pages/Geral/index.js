@@ -10,113 +10,115 @@ export default function GeralDash() {
     await Axios.get("/registros")
       .then(async (response) => {
         await setDados(response.data);
-        setInfoSeparacao({
-          quantidadeASeparar: response.data.filter(
-            (atual) => atual["inicioSeparacao"] === null
-          ).length,
-          volumeASeparar: response.data
-            .filter((atual) => atual["inicioSeparacao"] === null)
-            .reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
-              0
-            ),
-          quantidadeEmSeparacao: response.data.filter(
-            (atual) =>
-              atual["inicioSeparacao"] !== null &&
-              atual["fimSeparacao"] === null &&
-              atual["inicioCarregamento"] === null &&
-              atual["fimCarregamento"] === null
-          ).length,
-          volumeEmSeparacao: response.data
-            .filter(
+        setInfoSeparacao(
+          await {
+            quantidadeASeparar: response.data.filter(
+              (atual) => atual["inicioSeparacao"] === null
+            ).length,
+            volumeASeparar: response.data
+              .filter((atual) => atual["inicioSeparacao"] === null)
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+            quantidadeEmSeparacao: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] === null &&
                 atual["inicioCarregamento"] === null &&
                 atual["fimCarregamento"] === null
-            )
-            .reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
-              0
-            ),
-          quantidadeAConferir: response.data.filter(
-            (atual) =>
-              atual["inicioSeparacao"] !== null &&
-              atual["fimSeparacao"] !== null &&
-              atual["inicioCarregamento"] === null &&
-              atual["fimCarregamento"] === null
-          ).length,
-          volumeAConferir: response.data
-            .filter(
+            ).length,
+            volumeEmSeparacao: response.data
+              .filter(
+                (atual) =>
+                  atual["inicioSeparacao"] !== null &&
+                  atual["fimSeparacao"] === null &&
+                  atual["inicioCarregamento"] === null &&
+                  atual["fimCarregamento"] === null
+              )
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+            quantidadeAConferir: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] === null &&
                 atual["fimCarregamento"] === null
-            )
-            .reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
-              0
-            ),
-          quantidadeEmConferencia: response.data.filter(
-            (atual) =>
-              atual["inicioSeparacao"] !== null &&
-              atual["fimSeparacao"] !== null &&
-              atual["inicioCarregamento"] !== null &&
-              atual["fimCarregamento"] === null
-          ).length,
-          volumeEmConferencia: response.data
-            .filter(
+            ).length,
+            volumeAConferir: response.data
+              .filter(
+                (atual) =>
+                  atual["inicioSeparacao"] !== null &&
+                  atual["fimSeparacao"] !== null &&
+                  atual["inicioCarregamento"] === null &&
+                  atual["fimCarregamento"] === null
+              )
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+            quantidadeEmConferencia: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] !== null &&
                 atual["fimCarregamento"] === null
-            )
-            .reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
-              0
-            ),
-          quantidadeCarregado: response.data.filter(
-            (atual) =>
-              atual["inicioSeparacao"] !== null &&
-              atual["fimSeparacao"] !== null &&
-              atual["inicioCarregamento"] !== null &&
-              atual["fimCarregamento"] !== null
-          ).length,
-          volumeCarregado: response.data
-            .filter(
+            ).length,
+            volumeEmConferencia: response.data
+              .filter(
+                (atual) =>
+                  atual["inicioSeparacao"] !== null &&
+                  atual["fimSeparacao"] !== null &&
+                  atual["inicioCarregamento"] !== null &&
+                  atual["fimCarregamento"] === null
+              )
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+            quantidadeCarregado: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] !== null &&
                 atual["fimCarregamento"] !== null
-            )
-            .reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
-              0
-            ),
-        });
+            ).length,
+            volumeCarregado: response.data
+              .filter(
+                (atual) =>
+                  atual["inicioSeparacao"] !== null &&
+                  atual["fimSeparacao"] !== null &&
+                  atual["inicioCarregamento"] !== null &&
+                  atual["fimCarregamento"] !== null
+              )
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+          }
+        );
       })
       .catch((erro) => console.log(erro));
   }

@@ -1,13 +1,138 @@
 import { useEffect, useState } from "react";
-import Axios from "../../config/config";
+import MenuInferior from "../../components/Menu";
+import Axios from "../../config/config.js";
 
 export default function GeralDash() {
   const [dados, setDados] = useState([]);
+  const [infoSeparacao, setInfoSeparacao] = useState({});
+
+  async function AtualizarRegistro() {
+    await Axios.get("/registros")
+      .then(async (response) => {
+        await setDados(response.data);
+        setInfoSeparacao({
+          quantidadeASeparar: response.data.filter(
+            (atual) =>
+              atual["inicioSeparacao"] !== null &&
+              atual["fimSeparacao"] === null &&
+              atual["inicioCarregamento"] === null &&
+              (atual["fimCarregamento"] === null) !== null
+          ).length,
+          volumeASeparar: response.data
+            .filter(
+              (atual) =>
+                atual["inicioSeparacao"] !== null &&
+                atual["fimSeparacao"] === null &&
+                atual["inicioCarregamento"] === null &&
+                (atual["fimCarregamento"] === null) !== null
+            )
+            .reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
+          quantidadeEmSeparacao: response.data.filter(
+            (atual) =>
+              atual["inicioSeparacao"] !== null &&
+              atual["fimSeparacao"] === null &&
+              atual["inicioCarregamento"] === null &&
+              atual["fimCarregamento"] === null
+          ).length,
+          volumeEmSeparacao: response.data
+            .filter(
+              (atual) =>
+                atual["inicioSeparacao"] !== null &&
+                atual["fimSeparacao"] === null &&
+                atual["inicioCarregamento"] === null &&
+                atual["fimCarregamento"] === null
+            )
+            .reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
+          quantidadeAConferir: response.data.filter(
+            (atual) =>
+              atual["inicioSeparacao"] !== null &&
+              atual["fimSeparacao"] !== null &&
+              atual["inicioCarregamento"] === null &&
+              atual["fimCarregamento"] === null
+          ).length,
+          volumeAConferir: response.data
+            .filter(
+              (atual) =>
+                atual["inicioSeparacao"] !== null &&
+                atual["fimSeparacao"] !== null &&
+                atual["inicioCarregamento"] === null &&
+                atual["fimCarregamento"] === null
+            )
+            .reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
+          quantidadeEmConferencia: response.data.filter(
+            (atual) =>
+              atual["inicioSeparacao"] !== null &&
+              atual["fimSeparacao"] !== null &&
+              atual["inicioCarregamento"] !== null &&
+              atual["fimCarregamento"] === null
+          ).length,
+          volumeEmConferencia: response.data
+            .filter(
+              (atual) =>
+                atual["inicioSeparacao"] !== null &&
+                atual["fimSeparacao"] !== null &&
+                atual["inicioCarregamento"] !== null &&
+                atual["fimCarregamento"] === null
+            )
+            .reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
+          quantidadeCarregado: response.data.filter(
+            (atual) =>
+              atual["inicioSeparacao"] !== null &&
+              atual["fimSeparacao"] !== null &&
+              atual["inicioCarregamento"] !== null &&
+              atual["fimCarregamento"] !== null
+          ).length,
+          volumeCarregado: response.data
+            .filter(
+              (atual) =>
+                atual["inicioSeparacao"] !== null &&
+                atual["fimSeparacao"] !== null &&
+                atual["inicioCarregamento"] !== null &&
+                atual["fimCarregamento"] !== null
+            )
+            .reduce(
+              (acc, valor) =>
+                parseInt(acc) +
+                (parseInt(valor.Reentrega) +
+                  parseInt(valor.LDB) +
+                  parseInt(valor.ITB)),
+              0
+            ),
+        });
+      })
+      .catch((erro) => console.log(erro));
+  }
 
   useEffect(() => {
-    Axios.get("registros")
-      .then((response) => setDados(response.data))
-      .catch((erro) => console.log(erro));
+    AtualizarRegistro();
   }, []);
 
   function somar() {
@@ -40,8 +165,9 @@ export default function GeralDash() {
         atual["inicioCarregamento"] !== null &&
         atual["fimCarregamento"] !== null
     );
+  }
 
-    const dadosSeparados = {
+  /*const dadosSeparados = {
       ASeparar: ASeparar.length,
       emSeparacao: emSeparacao.length,
       AConferir: AConferir.length,
@@ -90,76 +216,84 @@ export default function GeralDash() {
     };
 
     return dadosSeparados;
-  }
+  }*/
 
   //f8e002
 
   return (
-    <div style={{ textAlign: "center", marginTop: 20, fontSize: 20 }}>
-      <div>STATUS ATUALIZADO ONLINE</div>
-      <div
-        style={{
-          borderRadius: 5,
-          backgroundColor: "#7d92f1",
-          margin: 5,
-          paddingTop: 30,
-          paddingBottom: 30,
-        }}
-      >
-        A Separar: {somar()?.ASeparar}
-        <br></br> Peso: {somar().ASepararSoma.toLocaleString("pt-BR")}
-      </div>
-      <div
-        style={{
-          borderRadius: 5,
-          backgroundColor: "#7d92f1",
-          margin: 5,
-          paddingTop: 30,
-          paddingBottom: 30,
-        }}
-      >
-        Em Separação: {somar()?.emSeparacao}
-        <br></br>
-        Peso: {somar().emSeparacaoSoma.toLocaleString("pt-BR")}
-      </div>
-      <div
-        style={{
-          borderRadius: 5,
-          backgroundColor: "#7d92f1",
-          margin: 5,
-          paddingTop: 30,
-          paddingBottom: 30,
-        }}
-      >
-        A Conferir: {somar()?.AConferir}
-        <br></br>
-        Peso: {somar().AConferirSoma.toLocaleString("pt-BR")}
-      </div>
-      <div
-        style={{
-          borderRadius: 5,
-          backgroundColor: "#7d92f1",
-          margin: 5,
-          paddingTop: 30,
-          paddingBottom: 30,
-        }}
-      >
-        Em Carregamento: {somar()?.EmConferencia}
-        <br></br>
-        Peso: {somar().EmConferenciaSoma.toLocaleString("pt-BR")}
-      </div>
-      <div
-        style={{
-          borderRadius: 5,
-          backgroundColor: "#7d92f1",
-          margin: 5,
-          paddingTop: 30,
-          paddingBottom: 30,
-        }}
-      >
-        Carregado: {somar()?.Carregado}
-        <br></br>
-        Peso: {somar().CarregadoSoma.toLocaleString("pt-BR")}
+    <div>
+      <MenuInferior />
+      <div style={{ textAlign: "center", marginTop: 10, fontSize: 20 }}>
+        <div>STATUS ATUALIZADO ONLINE</div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          A Separar: {infoSeparacao.quantidadeASeparar}
+          <br></br>Volume:
+          {parseInt(infoSeparacao.volumeASeparar).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          Em Separação: {infoSeparacao.quantidadeEmSeparacao}
+          <br></br>Volume:{" "}
+          {parseInt(infoSeparacao.volumeEmSeparacao).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          A Conferir: {infoSeparacao.quantidadeAConferir}
+          <br></br>Volume:{" "}
+          {parseInt(infoSeparacao.volumeAConferir).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          Em Conferencia: {infoSeparacao.quantidadeEmConferencia}
+          <br></br>Volume: {infoSeparacao.volumeEmConferencia}
+          <br></br>
+        </div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          Carregado: {infoSeparacao.quantidadeCarregado}
+          <br></br>Volume:
+          {parseInt(infoSeparacao.volumeCarregado).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
       </div>
     </div>
   );

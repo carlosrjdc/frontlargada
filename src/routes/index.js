@@ -8,7 +8,7 @@ import Transporte from "../pages/Transporte";
 const rotas = [
   {
     path: "/",
-    element: <Cadastro />,
+    element: <TabelaStatusGeral />,
   },
   {
     path: "/detalhes",
@@ -17,10 +17,6 @@ const rotas = [
   {
     path: "/dash",
     element: <GeralDash />,
-  },
-  {
-    path: "/status",
-    element: <TabelaStatusGeral />,
   },
 ];
 

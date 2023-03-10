@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import MenuInferior from "../../../components/Menu";
 import Axios from "../../../config/config";
 import { GlobalContext } from "../../../contexts";
 import Lista from "../Lista";
@@ -26,23 +27,29 @@ export default function Cadastro() {
   }
 
   useEffect(() => {
-    buscarRegistros();
+    Axios.get("/registros")
+      .then((response) => setDados(response.data))
+      .catch((erro) => console.log(erro));
   }, []);
 
   return (
-    <div style={{ padding: 10, marginTop: 20 }}>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Informe o Transporte</Form.Label>
-          <Form.Control
-            value={transporte}
-            onChange={(e) => setTransporte(e.target.value)}
-            type="number"
-            placeholder="Coloque o transporte"
-          />
-        </Form.Group>
-      </Form>
-      <Lista lista={filtro} />
+    <div>
+      <MenuInferior />
+      <div style={{ padding: 10, marginTop: 20 }}>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Informe o Transporte</Form.Label>
+            <Form.Control
+              value={transporte}
+              onChange={(e) => setTransporte(e.target.value)}
+              type="number"
+              placeholder="Coloque o transporte"
+            />
+          </Form.Group>
+        </Form>
+
+        <Lista lista={filtro} />
+      </div>
     </div>
   );
 }

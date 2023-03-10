@@ -125,7 +125,7 @@ export default function GeralDash() {
 
   useEffect(() => {
     AtualizarRegistro();
-  }, []);
+  }, [infoSeparacao]);
 
   function somar() {
     const ASeparar = dados.filter((atual) => atual["inicioSeparacao"] === null);

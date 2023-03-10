@@ -12,20 +12,10 @@ export default function GeralDash() {
         await setDados(response.data);
         setInfoSeparacao({
           quantidadeASeparar: response.data.filter(
-            (atual) =>
-              atual["inicioSeparacao"] !== null &&
-              atual["fimSeparacao"] === null &&
-              atual["inicioCarregamento"] === null &&
-              (atual["fimCarregamento"] === null) !== null
+            (atual) => atual["inicioSeparacao"] === null
           ).length,
           volumeASeparar: response.data
-            .filter(
-              (atual) =>
-                atual["inicioSeparacao"] !== null &&
-                atual["fimSeparacao"] === null &&
-                atual["inicioCarregamento"] === null &&
-                (atual["fimCarregamento"] === null) !== null
-            )
+            .filter((atual) => atual["inicioSeparacao"] === null)
             .reduce(
               (acc, valor) =>
                 parseInt(acc) +
@@ -276,7 +266,7 @@ export default function GeralDash() {
             paddingBottom: 30,
           }}
         >
-          Em Conferencia: {infoSeparacao.quantidadeEmConferencia}
+          Em Carregamento: {infoSeparacao.quantidadeEmConferencia}
           <br></br>Volume: {infoSeparacao.volumeEmConferencia}
           <br></br>
         </div>

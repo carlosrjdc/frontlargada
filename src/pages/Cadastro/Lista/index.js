@@ -51,8 +51,12 @@ export default function Lista(props) {
             <div>{item.NRota}</div>
             <div>{item.Transporte}</div>
           </div>
-          <div>{item.Cliente}</div>
-          <div>{item.Nf}</div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>{item.Cliente}</div>
+            <div>
+              {item.Bairro} / {item.Placa}
+            </div>
+          </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               {(

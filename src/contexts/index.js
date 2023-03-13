@@ -7,6 +7,8 @@ export function InfoProvider({ children }) {
   const [stts, setStatus] = useState("");
   const [show, setShow] = useState(false);
   const [dados, setDados] = useState([]);
+  const [crgParada, setCargaParada] = useState(false);
+  const [obsCargaParada, setObsCargaParada] = useState("");
 
   return (
     <GlobalContext.Provider
@@ -19,6 +21,10 @@ export function InfoProvider({ children }) {
         setStatus,
         dados,
         setDados,
+        crgParada,
+        setCargaParada,
+        obsCargaParada,
+        setObsCargaParada,
       }}
     >
       {children}

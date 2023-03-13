@@ -4,7 +4,7 @@ import { GlobalContext } from "../../../contexts";
 import Lista from "../../Cadastro/Lista";
 import Form from "react-bootstrap/Form";
 
-export default function ListaAConferir() {
+export default function CargaParada() {
   const { dados, setDados } = useContext(GlobalContext);
   const [transporte, setTransporte] = useState("");
   const [primieroFiltro, setPrimeiroFiltro] = useState([]);
@@ -23,12 +23,7 @@ export default function ListaAConferir() {
     Axios.get("/registros")
       .then((response) => {
         setPrimeiroFiltro(
-          response.data.filter(
-            (item) =>
-              item.inicioCarregamento === null &&
-              item.fimSeparacao !== null &&
-              item.cargaparada !== "cargaparada"
-          )
+          response.data.filter((item) => item.cargaparada === "cargaparada")
         );
       })
       .catch((erro) => console.log(erro));

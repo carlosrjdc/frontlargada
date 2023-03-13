@@ -25,7 +25,9 @@ export default function ListaEmCarregamento() {
         setPrimeiroFiltro(
           response.data.filter(
             (item) =>
-              item.fimCarregamento === null && item.inicioCarregamento !== null
+              item.fimCarregamento === null &&
+              item.inicioCarregamento !== null &&
+              item.cargaparada !== "cargaparada"
           )
         );
       })

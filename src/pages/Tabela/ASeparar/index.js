@@ -27,7 +27,11 @@ export default function ListaASeparar() {
     Axios.get("/registros")
       .then((response) => {
         setPrimeiroFiltro(
-          response.data.filter((item) => item.inicioSeparacao === null)
+          response.data.filter(
+            (item) =>
+              item.inicioSeparacao === null &&
+              item.cargaparada !== "cargaparada"
+          )
         );
       })
       .catch((erro) => console.log(erro));

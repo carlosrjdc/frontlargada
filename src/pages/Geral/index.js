@@ -21,11 +21,31 @@ export default function GeralDash() {
                   parseInt(valor.ITB)),
               0
             ),
+            quantidadeCargaParada: response.data.filter(
+              (atual) => atual["cargaparada"] === "cargaparada"
+            ).length,
+            volumeCargaParada: response.data
+              .filter((atual) => atual["cargaparada"] === "cargaparada")
+              .reduce(
+                (acc, valor) =>
+                  parseInt(acc) +
+                  (parseInt(valor.Reentrega) +
+                    parseInt(valor.LDB) +
+                    parseInt(valor.ITB)),
+                0
+              ),
+
             quantidadeASeparar: response.data.filter(
-              (atual) => atual["inicioSeparacao"] === null
+              (atual) =>
+                atual["inicioSeparacao"] === null &&
+                atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeASeparar: response.data
-              .filter((atual) => atual["inicioSeparacao"] === null)
+              .filter(
+                (atual) =>
+                  atual["inicioSeparacao"] === null &&
+                  atual["cargaparada"] !== "cargaparada"
+              )
               .reduce(
                 (acc, valor) =>
                   parseInt(acc) +
@@ -39,7 +59,8 @@ export default function GeralDash() {
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] === null &&
                 atual["inicioCarregamento"] === null &&
-                atual["fimCarregamento"] === null
+                atual["fimCarregamento"] === null &&
+                atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeEmSeparacao: response.data
               .filter(
@@ -47,7 +68,8 @@ export default function GeralDash() {
                   atual["inicioSeparacao"] !== null &&
                   atual["fimSeparacao"] === null &&
                   atual["inicioCarregamento"] === null &&
-                  atual["fimCarregamento"] === null
+                  atual["fimCarregamento"] === null &&
+                  atual["cargaparada"] !== "cargaparada"
               )
               .reduce(
                 (acc, valor) =>
@@ -62,7 +84,8 @@ export default function GeralDash() {
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] === null &&
-                atual["fimCarregamento"] === null
+                atual["fimCarregamento"] === null &&
+                atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeAConferir: response.data
               .filter(
@@ -70,7 +93,8 @@ export default function GeralDash() {
                   atual["inicioSeparacao"] !== null &&
                   atual["fimSeparacao"] !== null &&
                   atual["inicioCarregamento"] === null &&
-                  atual["fimCarregamento"] === null
+                  atual["fimCarregamento"] === null &&
+                  atual["cargaparada"] !== "cargaparada"
               )
               .reduce(
                 (acc, valor) =>
@@ -85,7 +109,8 @@ export default function GeralDash() {
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] !== null &&
-                atual["fimCarregamento"] === null
+                atual["fimCarregamento"] === null &&
+                atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeEmConferencia: response.data
               .filter(
@@ -93,7 +118,8 @@ export default function GeralDash() {
                   atual["inicioSeparacao"] !== null &&
                   atual["fimSeparacao"] !== null &&
                   atual["inicioCarregamento"] !== null &&
-                  atual["fimCarregamento"] === null
+                  atual["fimCarregamento"] === null &&
+                  atual["cargaparada"] !== "cargaparada"
               )
               .reduce(
                 (acc, valor) =>
@@ -108,7 +134,8 @@ export default function GeralDash() {
                 atual["inicioSeparacao"] !== null &&
                 atual["fimSeparacao"] !== null &&
                 atual["inicioCarregamento"] !== null &&
-                atual["fimCarregamento"] !== null
+                atual["fimCarregamento"] !== null &&
+                atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeCarregado: response.data
               .filter(
@@ -116,7 +143,8 @@ export default function GeralDash() {
                   atual["inicioSeparacao"] !== null &&
                   atual["fimSeparacao"] !== null &&
                   atual["inicioCarregamento"] !== null &&
-                  atual["fimCarregamento"] !== null
+                  atual["fimCarregamento"] !== null &&
+                  atual["cargaparada"] !== "cargaparada"
               )
               .reduce(
                 (acc, valor) =>
@@ -138,6 +166,9 @@ export default function GeralDash() {
 
   function somar() {
     const ASeparar = dados.filter((atual) => atual["inicioSeparacao"] === null);
+    const cargaParada = dados.filter(
+      (atual) => atual["cargaparada"] === "cargaparada"
+    );
     const emSeparacao = dados.filter(
       (atual) =>
         atual["inicioSeparacao"] !== null &&
@@ -238,6 +269,20 @@ export default function GeralDash() {
           Total: {infoSeparacao.quantidade}
           <br></br>Volume:
           {parseInt(infoSeparacao.volume).toLocaleString("pt-BR")}
+          <br></br>
+        </div>
+        <div
+          style={{
+            borderRadius: 5,
+            backgroundColor: "#7d92f1",
+            margin: 5,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          Carga Parada: {infoSeparacao.quantidadeCargaParada}
+          <br></br>Volume:
+          {parseInt(infoSeparacao.volumeCargaParada).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div

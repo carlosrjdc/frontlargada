@@ -25,7 +25,9 @@ export default function ListaEmSeparacao() {
         setPrimeiroFiltro(
           response.data.filter(
             (item) =>
-              item.fimSeparacao === null && item.inicioSeparacao !== null
+              item.fimSeparacao === null &&
+              item.inicioSeparacao !== null &&
+              item.cargaparada !== "cargaparada"
           )
         );
       })

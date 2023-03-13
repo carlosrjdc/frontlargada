@@ -5,6 +5,7 @@ import MenuInferior from "../../components/Menu";
 
 import ListaAConferir from "./AConferir";
 import ListaASeparar from "./ASeparar";
+import CargaParada from "./CargaParada";
 import ListaCarregado from "./Carregado";
 import ListaEmCarregamento from "./EmCarregamento";
 import ListaEmSeparacao from "./EmSeparacao";
@@ -39,6 +40,9 @@ function TabelaStatusGeral() {
         </Tab>
         <Tab eventKey="carregado" title="Carregado">
           <ListaCarregado />
+        </Tab>
+        <Tab eventKey="cargaparada" title="Carga Parada">
+          <CargaParada />
         </Tab>
         <Tab eventKey="listaGeral" title="Lista Geral">
           <ListaGeral />

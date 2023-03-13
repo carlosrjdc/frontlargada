@@ -67,7 +67,11 @@ export default function Lista(props) {
                 minimumFractionDigits: 2,
               })}
             </div>
-            <div style={{ fontWeight: "bold" }}>{status(item).status}</div>
+            <div style={{ fontWeight: "bold" }}>
+              {item.cargaparada !== "cargaparada"
+                ? status(item).status
+                : "Carga Parada"}
+            </div>
           </div>
         </div>
       ))}

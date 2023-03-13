@@ -23,7 +23,11 @@ export default function ListaCarregado() {
     Axios.get("/registros")
       .then((response) => {
         setPrimeiroFiltro(
-          response.data.filter((item) => item.fimCarregamento !== null)
+          response.data.filter(
+            (item) =>
+              item.fimCarregamento !== null &&
+              item.cargaparada !== "cargaparada"
+          )
         );
       })
       .catch((erro) => console.log(erro));

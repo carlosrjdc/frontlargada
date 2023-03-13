@@ -1,23 +1,39 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Axios from "../../../config/config.js";
-import { GlobalContext } from "../../../contexts";
 import Lista from "../../Cadastro/Lista";
 import Form from "react-bootstrap/Form";
 
 export default function CargaParada() {
-  const { dados, setDados } = useContext(GlobalContext);
   const [transporte, setTransporte] = useState("");
   const [primieroFiltro, setPrimeiroFiltro] = useState([]);
 
   const filtro =
     transporte.length > 0
-      ? primieroFiltro.filter(
-          (item) =>
-            item.Transporte?.includes(transporte.toUpperCase()) ||
-            item.Nf?.includes(transporte.toUpperCase()) ||
-            item.NRota?.includes(transporte.toUpperCase())
-        )
-      : primieroFiltro;
+      ? primieroFiltro
+          .filter(
+            (item) =>
+              item.Transporte?.includes(transporte.toUpperCase()) ||
+              item.Nf?.includes(transporte.toUpperCase()) ||
+              item.NRota?.includes(transporte.toUpperCase())
+          )
+          .sort((a, b) => {
+            if (a.Bairro > b.Barrio) {
+              return 1;
+            }
+            if (a.Bairro < b.Barrio) {
+              return 1;
+            }
+            return 0;
+          })
+      : primieroFiltro.sort((a, b) => {
+          if (a.Bairro > b.Barrio) {
+            return 1;
+          }
+          if (a.Bairro < b.Barrio) {
+            return 1;
+          }
+          return 0;
+        });
 
   async function buscarRegistros() {
     Axios.get("/registros")

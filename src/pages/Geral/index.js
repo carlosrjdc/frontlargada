@@ -262,8 +262,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           Total: {infoSeparacao.quantidade}
@@ -276,8 +276,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           Carga Parada: {infoSeparacao.quantidadeCargaParada}
@@ -290,8 +290,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           A Separar: {infoSeparacao.quantidadeASeparar}
@@ -304,8 +304,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           Em Separação: {infoSeparacao.quantidadeEmSeparacao}
@@ -318,8 +318,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           A Conferir: {infoSeparacao.quantidadeAConferir}
@@ -332,8 +332,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           Em Carregamento: {infoSeparacao.quantidadeEmConferencia}
@@ -346,8 +346,8 @@ export default function GeralDash() {
             borderRadius: 5,
             backgroundColor: "#7d92f1",
             margin: 5,
-            paddingTop: 30,
-            paddingBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
           }}
         >
           Carregado: {infoSeparacao.quantidadeCarregado}

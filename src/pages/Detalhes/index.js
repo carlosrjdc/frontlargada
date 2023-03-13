@@ -1,12 +1,11 @@
 import { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
-import ModalConfirmacao from "../../components/Modal";
+import ModalConfirmacao from "../../components/Modal.js";
 import { GlobalContext } from "../../contexts";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import ModalConfirmacaoCargaParada from "../../components/ModalRetirarCargaParada";
+import ModalConfirmacaoCargaParada from "../../components/ModalRetirarCargaParada.js";
 
-export function Detalhes() {
+export default function Detalhes() {
   const {
     infoTransporte,
     show,

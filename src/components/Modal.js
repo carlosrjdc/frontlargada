@@ -57,7 +57,7 @@ export default function ModalConfirmacao(props) {
         setObsCargaParada("");
       });
     }
-
+    setObsCargaParada("");
     setShow(false);
     navigate("/");
   }

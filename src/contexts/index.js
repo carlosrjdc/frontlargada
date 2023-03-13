@@ -6,6 +6,7 @@ export function InfoProvider({ children }) {
   const [infoTransporte, setInfoTransporte] = useState({});
   const [stts, setStatus] = useState("");
   const [show, setShow] = useState(false);
+  const [showCargaParada, setShowCargaParada] = useState(false);
   const [dados, setDados] = useState([]);
   const [crgParada, setCargaParada] = useState(false);
   const [obsCargaParada, setObsCargaParada] = useState("");
@@ -25,6 +26,8 @@ export function InfoProvider({ children }) {
         setCargaParada,
         obsCargaParada,
         setObsCargaParada,
+        showCargaParada,
+        setShowCargaParada,
       }}
     >
       {children}

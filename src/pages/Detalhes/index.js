@@ -4,11 +4,14 @@ import ModalConfirmacao from "../../components/Modal";
 import { GlobalContext } from "../../contexts";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import ModalConfirmacaoCargaParada from "../../components/ModalRetirarCargaParada";
 
 export function Detalhes() {
   const {
     infoTransporte,
     show,
+    showCargaParada,
+    setShowCargaParada,
     setShow,
     crgParada,
     setCargaParada,
@@ -19,6 +22,7 @@ export function Detalhes() {
   return (
     <div>
       <ModalConfirmacao lista={infoTransporte} />
+      <ModalConfirmacaoCargaParada lista={infoTransporte} />
       <div style={{ fontSize: 17, marginLeft: 10, marginTop: 20 }}>
         <div>Rota: {infoTransporte?.NRota}</div>
         <div>Transporte: {infoTransporte?.Transporte}</div>
@@ -60,10 +64,24 @@ export function Detalhes() {
             as="textarea"
           />
         </Form.Group>
-        <br></br>
-        <br></br>
-        <br></br>
-        <Button onClick={() => setShow(true)}>Atualizar</Button>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginRight: "5%",
+            marginLeft: "5%",
+            marginBottom: "5%",
+          }}
+        >
+          <Button onClick={() => setShow(true)}>Atualizar</Button>
+          <Button
+            disabled={!infoTransporte.cargaparada}
+            onClick={() => setShowCargaParada(true)}
+          >
+            Retirar Carga Parada
+          </Button>
+        </div>
       </div>
     </div>
   );

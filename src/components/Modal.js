@@ -53,6 +53,8 @@ export default function ModalConfirmacao(props) {
       Axios.put(`atualizar/${lista.id}`, {
         cargaparada: "cargaparada",
         obs: obsCargaParada,
+      }).then(() => {
+        setObsCargaParada("");
       });
     }
 

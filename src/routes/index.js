@@ -2,6 +2,7 @@ import BuscarProduto from "../pages/BuscarProduto";
 import Detalhes from "../pages/Detalhes";
 import GeralDash from "../pages/Geral";
 import TabelaStatusGeral from "../pages/Tabela";
+import UploadEscala from "../pages/Upload";
 
 const rotas = [
   {
@@ -19,6 +20,10 @@ const rotas = [
   {
     path: "/buscarproduto",
     element: <BuscarProduto />,
+  },
+  {
+    path: "/uploadescala",
+    element: <UploadEscala />,
   },
 ];
 

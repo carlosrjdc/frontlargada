@@ -32,7 +32,15 @@ export default function BuscarProduto() {
       </div>
       {filtro.map((item) => {
         return (
-          <div style={{ margin: 10, background: "#92b0e7" }}>
+          <div
+            key={item.id}
+            style={{
+              margin: 10,
+              background: "#92b0e7",
+              padding: 10,
+              borderRadius: 5,
+            }}
+          >
             <div style={{ color: "red", fontWeight: "bold" }}>
               Endereço: {item.endereco}
             </div>

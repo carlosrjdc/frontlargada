@@ -21,12 +21,15 @@ export default function BuscarProduto() {
   return (
     <div>
       <MenuInferior />
-      <Form.Control
-        value={transporte}
-        onChange={(e) => setTransporte(e.target.value)}
-        type="number"
-        placeholder="Informe o SKU"
-      />
+      <div style={{ margin: 10 }}>
+        <Form.Control
+          style={{ padding: 10 }}
+          value={transporte}
+          onChange={(e) => setTransporte(e.target.value)}
+          type="number"
+          placeholder="Informe o SKU"
+        />
+      </div>
       {filtro.map((item) => {
         return (
           <div style={{ margin: 10, background: "#92b0e7" }}>

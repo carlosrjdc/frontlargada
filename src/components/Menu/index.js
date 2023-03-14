@@ -17,6 +17,16 @@ export default function MenuInferior() {
         Cadastro
       </a>
       <a
+        href="buscarproduto"
+        class={segundoselecionado}
+        onClick={() => {
+          setSegundoSelecionado("active");
+          setSelecionado("");
+        }}
+      >
+        Buscar Produto
+      </a>
+      <a
         href="dash"
         class={segundoselecionado}
         onClick={() => {

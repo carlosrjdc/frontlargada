@@ -4,7 +4,7 @@ import FormData from "form-data";
 import { useState } from "react";
 import Axios from "../../config/config";
 
-export default function UploadEscala() {
+export default function UploadEstoque() {
   const [file, setFile] = useState();
   const [dados, setDados] = useState([]);
   const [value, setValue] = useState(0);
@@ -19,7 +19,7 @@ export default function UploadEscala() {
   };
 
   const excluirRegistros = async () => {
-    Axios.delete("/deletarescala")
+    Axios.delete("/deletarcontagem")
       .then((response) => setStatusExcluir("Registro deletado com Sucesso!"))
       .then((erro) => console.log(erro));
 
@@ -32,7 +32,7 @@ export default function UploadEscala() {
     const data = new FormData();
     data.append("arquivo", file);
 
-    Axios.post("/uploadescalaemmassa", data)
+    Axios.post("/uploadcontagem", data)
       .then((response) => setStatusIpload("Upload feito com sucesso"))
       .catch((erro) =>
         setStatusIpload(
@@ -57,7 +57,7 @@ export default function UploadEscala() {
           fontWeight: "bold",
         }}
       >
-        <div> Excluir Escala "Atenção essa ação não tem volta!"</div>
+        <div> Excluir contagem estoque "Atenção essa ação não tem volta"</div>
         <Button style={{ margin: 10 }} onClick={excluirRegistros}>
           Excluir
         </Button>
@@ -75,7 +75,7 @@ export default function UploadEscala() {
       <div style={{ margin: 10 }}>
         <Form>
           <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Upload da escala</Form.Label>
+            <Form.Label>Upload contagem</Form.Label>
             <Form.Control type="file" onChange={(e) => handleFileChange(e)} />
           </Form.Group>
           <Button

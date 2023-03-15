@@ -3,6 +3,7 @@ import Detalhes from "../pages/Detalhes";
 import GeralDash from "../pages/Geral";
 import TabelaStatusGeral from "../pages/Tabela";
 import UploadEscala from "../pages/Upload";
+import UploadEstoque from "../pages/UploadEstoque";
 
 const rotas = [
   {
@@ -24,6 +25,10 @@ const rotas = [
   {
     path: "/uploadescala",
     element: <UploadEscala />,
+  },
+  {
+    path: "/uploadContagem",
+    element: <UploadEstoque />,
   },
 ];
 

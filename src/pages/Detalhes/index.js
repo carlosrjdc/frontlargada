@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import moment from "moment";
 import { Button } from "react-bootstrap";
 import ModalConfirmacao from "../../components/Modal.js";
 import { GlobalContext } from "../../contexts";
@@ -34,10 +35,38 @@ export default function Detalhes() {
         <div>Peso Lactalis: {infoTransporte?.LDB}</div>
         <div>Peso Itambé: {infoTransporte?.ITB}</div>
         <div>Reentrega: {infoTransporte?.Reentrega}</div>
-        <div>Inicio Separação: {infoTransporte?.inicioSeparacao}</div>
-        <div>Termino Separação: {infoTransporte?.fimSeparacao}</div>
-        <div>Inicio Conferencia: {infoTransporte?.inicioCarregamento}</div>
-        <div>Termino Carregamento: {infoTransporte?.fimCarregamento}</div>
+        <div>
+          Inicio Separação:{" "}
+          {infoTransporte.inicioSeparacao
+            ? moment(
+                new Date(infoTransporte?.inicioSeparacao) - 10800000
+              ).format("DD/MM/YYYY hh:mm")
+            : ""}
+        </div>
+        <div>
+          Termino Separação:{" "}
+          {infoTransporte.fimSeparacao
+            ? moment(new Date(infoTransporte?.fimSeparacao) - 10800000).format(
+                "DD/MM/YYYY hh:mm"
+              )
+            : ""}
+        </div>
+        <div>
+          Inicio Conferencia:{" "}
+          {infoTransporte.inicioCarregamento
+            ? moment(
+                new Date(infoTransporte?.inicioCarregamento) - 10800000
+              ).format("DD/MM/YYYY hh:mm")
+            : ""}
+        </div>
+        <div>
+          Termino Carregamento:{" "}
+          {infoTransporte.fimCarregamento
+            ? moment(
+                new Date(infoTransporte?.fimCarregamento) - 10800000
+              ).format("DD/MM/YYYY hh:mm")
+            : ""}
+        </div>
         <br></br>
         <div style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
           {infoTransporte.cargaparada ? "Carga Parada" : ""}

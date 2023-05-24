@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { Button } from "react-bootstrap";
 import ModalConfirmacao from "../../components/Modal.js";
@@ -19,9 +19,15 @@ export default function Detalhes() {
     setObsCargaParada,
   } = useContext(GlobalContext);
 
+  const [placa, setPlaca] = useState(infoTransporte?.Placa.slice(0, 7));
+  const [lacre, setLacre] = useState(infoTransporte?.lacre1);
+
+  let padrao = /^[A-Z]{3}\d{4}$|^[A-Z]{3}\d[A-Z]\d{2}$/;
+  let corresponde = padrao.test(placa);
+
   return (
     <div>
-      <ModalConfirmacao lista={infoTransporte} />
+      <ModalConfirmacao placa={placa} lacre={lacre} lista={infoTransporte} />
       <ModalConfirmacaoCargaParada lista={infoTransporte} />
       <div style={{ fontSize: 17, marginLeft: 10, marginTop: 20 }}>
         <div>Rota: {infoTransporte?.NRota}</div>
@@ -37,40 +43,24 @@ export default function Detalhes() {
         <div>Reentrega: {infoTransporte?.Reentrega}</div>
         <div>
           Inicio Separação:{" "}
-          {infoTransporte.inicioSeparacao
-            ? moment(
-                new Date(infoTransporte?.inicioSeparacao) - 10800000
-              ).format("DD/MM/YYYY hh:mm")
-            : ""}
+          {infoTransporte.inicioSeparacao ? moment(new Date(infoTransporte?.inicioSeparacao)).format("DD/MM/YYYY HH:mm:ss") : ""}
         </div>
         <div>
           Termino Separação:{" "}
-          {infoTransporte.fimSeparacao
-            ? moment(new Date(infoTransporte?.fimSeparacao) - 10800000).format(
-                "DD/MM/YYYY hh:mm"
-              )
-            : ""}
+          {infoTransporte.fimSeparacao ? moment(new Date(infoTransporte?.fimSeparacao)).format("DD/MM/YYYY HH:mm:ss") : ""}
         </div>
         <div>
           Inicio Conferencia:{" "}
           {infoTransporte.inicioCarregamento
-            ? moment(
-                new Date(infoTransporte?.inicioCarregamento) - 10800000
-              ).format("DD/MM/YYYY hh:mm")
+            ? moment(new Date(infoTransporte?.inicioCarregamento)).format("DD/MM/YYYY HH:mm:ss")
             : ""}
         </div>
         <div>
           Termino Carregamento:{" "}
-          {infoTransporte.fimCarregamento
-            ? moment(
-                new Date(infoTransporte?.fimCarregamento) - 10800000
-              ).format("DD/MM/YYYY hh:mm")
-            : ""}
+          {infoTransporte.fimCarregamento ? moment(new Date(infoTransporte?.fimCarregamento)).format("DD/MM/YYYY HH:mm:ss") : ""}
         </div>
         <br></br>
-        <div style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>
-          {infoTransporte.cargaparada ? "Carga Parada" : ""}
-        </div>
+        <div style={{ color: "red", fontWeight: "bold", fontSize: 20 }}>{infoTransporte.cargaparada ? "Carga Parada" : ""}</div>
         <br></br>
         <Form.Check
           label={`Carga Parada `}
@@ -92,6 +82,26 @@ export default function Detalhes() {
             as="textarea"
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>PLACA:</Form.Label>
+          <Form.Control
+            disabled={infoTransporte.fimCarregamento}
+            value={placa}
+            onChange={(e) => setPlaca(e.target.value)}
+            type="text"
+            placeholder="Informe o motivo da carga parada"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>LACRE:</Form.Label>
+          <Form.Control
+            disabled={infoTransporte.fimCarregamento}
+            value={lacre}
+            onChange={(e) => setLacre(e.target.value)}
+            type="text"
+            placeholder="Informe o motivo da carga parada"
+          />
+        </Form.Group>
 
         <div
           style={{
@@ -102,11 +112,10 @@ export default function Detalhes() {
             marginBottom: "5%",
           }}
         >
-          <Button onClick={() => setShow(true)}>Atualizar</Button>
-          <Button
-            disabled={!infoTransporte.cargaparada}
-            onClick={() => setShowCargaParada(true)}
-          >
+          <Button disabled={!corresponde || (!lacre && infoTransporte.inicioCarregamento)} onClick={() => setShow(true)}>
+            Atualizar
+          </Button>
+          <Button disabled={!infoTransporte.cargaparada} onClick={() => setShowCargaParada(true)}>
             Retirar Carga Parada
           </Button>
         </div>

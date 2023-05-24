@@ -1,9 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 
 const Axios = axios.create({
-    baseURL: "https://largadaapi.vercel.app/",
-    timeout: 5000,
-    headers: {'X-Custom-Header': 'foobar'}
-  });
+  baseURL: "https://auditoria-gold.vercel.app/",
+  timeout: 5000,
+  headers: { "X-Custom-Header": "foobar" },
+});
 
-  export default Axios
+export default Axios;

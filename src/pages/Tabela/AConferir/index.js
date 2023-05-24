@@ -20,14 +20,11 @@ export default function ListaAConferir() {
       : primieroFiltro;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
         setPrimeiroFiltro(
           response.data.filter(
-            (item) =>
-              item.inicioCarregamento === null &&
-              item.fimSeparacao !== null &&
-              item.cargaparada !== "cargaparada"
+            (item) => item.inicioCarregamento === null && item.fimSeparacao !== null && item.cargaparada !== "cargaparada"
           )
         );
       })

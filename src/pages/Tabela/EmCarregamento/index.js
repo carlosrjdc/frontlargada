@@ -20,14 +20,11 @@ export default function ListaEmCarregamento() {
       : primieroFiltro;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
         setPrimeiroFiltro(
           response.data.filter(
-            (item) =>
-              item.fimCarregamento === null &&
-              item.inicioCarregamento !== null &&
-              item.cargaparada !== "cargaparada"
+            (item) => item.fimCarregamento === null && item.inicioCarregamento !== null && item.cargaparada !== "cargaparada"
           )
         );
       })

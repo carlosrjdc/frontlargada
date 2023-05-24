@@ -20,14 +20,11 @@ export default function ListaEmSeparacao() {
       : primieroFiltro;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
         setPrimeiroFiltro(
           response.data.filter(
-            (item) =>
-              item.fimSeparacao === null &&
-              item.inicioSeparacao !== null &&
-              item.cargaparada !== "cargaparada"
+            (item) => item.fimSeparacao === null && item.inicioSeparacao !== null && item.cargaparada !== "cargaparada"
           )
         );
       })

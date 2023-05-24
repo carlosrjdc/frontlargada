@@ -7,53 +7,27 @@ export default function GeralDash() {
   const [infoSeparacao, setInfoSeparacao] = useState({});
 
   async function AtualizarRegistro() {
-    await Axios.get("/registros")
+    await Axios.get("/largada")
       .then(async (response) => {
         await setDados(response.data);
         await setInfoSeparacao(
           await {
             quantidade: response.data.length,
             volume: response.data.reduce(
-              (acc, valor) =>
-                parseInt(acc) +
-                (parseInt(valor.Reentrega) +
-                  parseInt(valor.LDB) +
-                  parseInt(valor.ITB)),
+              (acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)),
               0
             ),
-            quantidadeCargaParada: response.data.filter(
-              (atual) => atual["cargaparada"] === "cargaparada"
-            ).length,
+            quantidadeCargaParada: response.data.filter((atual) => atual["cargaparada"] === "cargaparada").length,
             volumeCargaParada: response.data
               .filter((atual) => atual["cargaparada"] === "cargaparada")
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
 
             quantidadeASeparar: response.data.filter(
-              (atual) =>
-                atual["inicioSeparacao"] === null &&
-                atual["cargaparada"] !== "cargaparada"
+              (atual) => atual["inicioSeparacao"] === null && atual["cargaparada"] !== "cargaparada"
             ).length,
             volumeASeparar: response.data
-              .filter(
-                (atual) =>
-                  atual["inicioSeparacao"] === null &&
-                  atual["cargaparada"] !== "cargaparada"
-              )
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .filter((atual) => atual["inicioSeparacao"] === null && atual["cargaparada"] !== "cargaparada")
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
             quantidadeEmSeparacao: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
@@ -71,14 +45,7 @@ export default function GeralDash() {
                   atual["fimCarregamento"] === null &&
                   atual["cargaparada"] !== "cargaparada"
               )
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
             quantidadeAConferir: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
@@ -96,14 +63,7 @@ export default function GeralDash() {
                   atual["fimCarregamento"] === null &&
                   atual["cargaparada"] !== "cargaparada"
               )
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
             quantidadeEmConferencia: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
@@ -121,14 +81,7 @@ export default function GeralDash() {
                   atual["fimCarregamento"] === null &&
                   atual["cargaparada"] !== "cargaparada"
               )
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
             quantidadeCarregado: response.data.filter(
               (atual) =>
                 atual["inicioSeparacao"] !== null &&
@@ -146,14 +99,7 @@ export default function GeralDash() {
                   atual["fimCarregamento"] !== null &&
                   atual["cargaparada"] !== "cargaparada"
               )
-              .reduce(
-                (acc, valor) =>
-                  parseInt(acc) +
-                  (parseInt(valor.Reentrega) +
-                    parseInt(valor.LDB) +
-                    parseInt(valor.ITB)),
-                0
-              ),
+              .reduce((acc, valor) => parseInt(acc) + (parseInt(valor.Reentrega) + parseInt(valor.LDB) + parseInt(valor.ITB)), 0),
           }
         );
       })
@@ -166,9 +112,7 @@ export default function GeralDash() {
 
   function somar() {
     const ASeparar = dados.filter((atual) => atual["inicioSeparacao"] === null);
-    const cargaParada = dados.filter(
-      (atual) => atual["cargaparada"] === "cargaparada"
-    );
+    const cargaParada = dados.filter((atual) => atual["cargaparada"] === "cargaparada");
     const emSeparacao = dados.filter(
       (atual) =>
         atual["inicioSeparacao"] !== null &&
@@ -309,8 +253,7 @@ export default function GeralDash() {
           }}
         >
           Em Separação: {infoSeparacao.quantidadeEmSeparacao}
-          <br></br>Volume:{" "}
-          {parseInt(infoSeparacao?.volumeEmSeparacao).toLocaleString("pt-BR")}
+          <br></br>Volume: {parseInt(infoSeparacao?.volumeEmSeparacao).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div
@@ -323,8 +266,7 @@ export default function GeralDash() {
           }}
         >
           A Conferir: {infoSeparacao.quantidadeAConferir}
-          <br></br>Volume:{" "}
-          {parseInt(infoSeparacao?.volumeAConferir).toLocaleString("pt-BR")}
+          <br></br>Volume: {parseInt(infoSeparacao?.volumeAConferir).toLocaleString("pt-BR")}
           <br></br>
         </div>
         <div

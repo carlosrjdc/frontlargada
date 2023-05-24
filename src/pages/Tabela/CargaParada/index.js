@@ -36,11 +36,9 @@ export default function CargaParada() {
         });
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
-        setPrimeiroFiltro(
-          response.data.filter((item) => item.cargaparada === "cargaparada")
-        );
+        setPrimeiroFiltro(response.data.filter((item) => item.cargaparada === "cargaparada"));
       })
       .catch((erro) => console.log(erro));
   }

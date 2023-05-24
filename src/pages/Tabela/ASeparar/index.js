@@ -24,15 +24,9 @@ export default function ListaASeparar() {
       : primieroFiltro;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
-        setPrimeiroFiltro(
-          response.data.filter(
-            (item) =>
-              item.inicioSeparacao === null &&
-              item.cargaparada !== "cargaparada"
-          )
-        );
+        setPrimeiroFiltro(response.data.filter((item) => item.inicioSeparacao === null && item.cargaparada !== "cargaparada"));
       })
       .catch((erro) => console.log(erro));
   }

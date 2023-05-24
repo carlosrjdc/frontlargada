@@ -20,7 +20,7 @@ export default function ListaGeral() {
       : primieroFiltro;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => {
         setPrimeiroFiltro(response.data);
       })

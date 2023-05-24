@@ -19,7 +19,7 @@ export default function UploadEscala() {
   };
 
   const excluirRegistros = async () => {
-    Axios.delete("/deletarescala")
+    Axios.delete("/largada")
       .then((response) => setStatusExcluir("Registro deletado com Sucesso!"))
       .then((erro) => console.log(erro));
 
@@ -32,13 +32,9 @@ export default function UploadEscala() {
     const data = new FormData();
     data.append("arquivo", file);
 
-    Axios.post("/uploadescalaemmassa", data)
+    Axios.post("/largada/emmassa", data)
       .then((response) => setStatusIpload("Upload feito com sucesso"))
-      .catch((erro) =>
-        setStatusIpload(
-          "Erro: provavel duplicidade no registro, ou planilha incorreta "
-        )
-      );
+      .catch((erro) => setStatusIpload("Erro: provavel duplicidade no registro, ou planilha incorreta "));
 
     // ...
     // Inserimos aqui nossa chamada POST/PUT
@@ -62,15 +58,7 @@ export default function UploadEscala() {
           Excluir
         </Button>
       </div>
-      <div
-        style={
-          statusExcluir
-            ? { background: "yellow", padding: 5, fontWeight: "bold" }
-            : null
-        }
-      >
-        {statusExcluir}
-      </div>
+      <div style={statusExcluir ? { background: "yellow", padding: 5, fontWeight: "bold" } : null}>{statusExcluir}</div>
       <br></br>
       <div style={{ margin: 10 }}>
         <Form>
@@ -78,21 +66,10 @@ export default function UploadEscala() {
             <Form.Label>Upload da escala</Form.Label>
             <Form.Control type="file" onChange={(e) => handleFileChange(e)} />
           </Form.Group>
-          <Button
-            style={{ margin: 10, fontWeight: "bold" }}
-            onClick={addNewCard}
-          >
+          <Button style={{ margin: 10, fontWeight: "bold" }} onClick={addNewCard}>
             Upload
           </Button>
-          <div
-            style={
-              statusUpload
-                ? { background: "yellow", padding: 5, fontWeight: "bold" }
-                : null
-            }
-          >
-            {statusUpload}
-          </div>
+          <div style={statusUpload ? { background: "yellow", padding: 5, fontWeight: "bold" } : null}>{statusUpload}</div>
         </Form>
       </div>
     </div>

@@ -7,15 +7,8 @@ import Axios from "../config/config";
 import { useNavigate } from "react-router-dom";
 
 export default function ModalConfirmacaoCargaParada(props) {
-  const {
-    showCargaParada,
-    setShowCargaParada,
-    stts,
-    crgParada,
-    obsCargaParada,
-    setCargaParada,
-    setObsCargaParada,
-  } = useContext(GlobalContext);
+  const { showCargaParada, setShowCargaParada, stts, crgParada, obsCargaParada, setCargaParada, setObsCargaParada } =
+    useContext(GlobalContext);
   const handleClose = () => setShowCargaParada(false);
   const handleShow = () => setShowCargaParada(true);
   const { lista } = props;
@@ -23,7 +16,7 @@ export default function ModalConfirmacaoCargaParada(props) {
   const navigate = useNavigate();
 
   function atualizarBancodeDados() {
-    Axios.put(`atualizar/${lista.id}`, {
+    Axios.put(`largada/${lista.id}`, {
       cargaparada: "",
       obs: "",
     }).then(() => {
@@ -46,9 +39,7 @@ export default function ModalConfirmacaoCargaParada(props) {
           <div>Rota: {lista.NRota}</div>
           <div>Cliente: {lista.Cliente}</div>
           <br></br>
-          <div>
-            {"Ao Clicar em salvar o transporte vai sair da carga parada"}
-          </div>
+          <div>{"Ao Clicar em salvar o transporte vai sair da carga parada"}</div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

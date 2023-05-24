@@ -21,15 +21,13 @@ export default function Cadastro() {
       : dados;
 
   async function buscarRegistros() {
-    Axios.get("/registros")
+    Axios.get("/largada")
       .then((response) => setDados(response.data))
       .catch((erro) => console.log(erro));
   }
 
   useEffect(() => {
-    Axios.get("/registros")
-      .then((response) => setDados(response.data))
-      .catch((erro) => console.log(erro));
+    buscarRegistros();
   }, []);
 
   return (

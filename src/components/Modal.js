@@ -7,18 +7,9 @@ import Axios from "../config/config";
 import { useNavigate } from "react-router-dom";
 
 export default function ModalConfirmacao(props) {
-  const {
-    show,
-    setShow,
-    stts,
-    crgParada,
-    obsCargaParada,
-    setCargaParada,
-    setObsCargaParada,
-  } = useContext(GlobalContext);
+  const { show, setShow, stts, crgParada, obsCargaParada, setObsCargaParada } = useContext(GlobalContext);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const { lista } = props;
+  const { lista, placa, lacre } = props;
 
   const navigate = useNavigate();
 
@@ -27,30 +18,38 @@ export default function ModalConfirmacao(props) {
       const verInfo = status();
       switch (verInfo) {
         case "inicioSeparacao":
-          Axios.put(`atualizar/${lista.id}`, {
+          Axios.put(`largada/${lista.id}`, {
             inicioSeparacao: new Date(),
+            Placa: placa,
+            lacre1: lacre ? lacre.toString() : null,
           });
           break;
         case "fimSeparacao":
-          Axios.put(`atualizar/${lista.id}`, {
+          Axios.put(`largada/${lista.id}`, {
             fimSeparacao: new Date(),
+            Placa: placa,
+            lacre1: lacre ? lacre.toString() : null,
           });
           break;
         case "inicioCarregamento":
-          Axios.put(`atualizar/${lista.id}`, {
+          Axios.put(`largada/${lista.id}`, {
             inicioCarregamento: new Date(),
+            Placa: placa,
+            lacre1: lacre ? lacre.toString() : null,
           });
           break;
         case "fimCarregamento":
-          Axios.put(`atualizar/${lista.id}`, {
+          Axios.put(`largada/${lista.id}`, {
             fimCarregamento: new Date(),
+            Placa: placa,
+            lacre1: lacre.toString(),
           });
           break;
         default:
           console.log(`Não Localizado ${verInfo}.`);
       }
     } else {
-      Axios.put(`atualizar/${lista.id}`, {
+      Axios.put(`largada/${lista.id}`, {
         cargaparada: "cargaparada",
         obs: obsCargaParada,
       }).then(() => {
